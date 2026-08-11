@@ -1,0 +1,44 @@
+app:
+  table-name: document_chunks_claude_llm
+  input-token-limit: ${CLAUDE_MODEL_INPUT_TOKEN_LIMIT}
+  similarity-threshold: 0.4
+  top-k: 3
+
+spring:
+  application:
+    name: rag-demo
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ragdb
+    username: postgres
+    password: postgres
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  ai:
+    model:
+      chat: anthropic
+    anthropic:
+      api-key: ${API_KEY}
+
+      chat:
+        options:
+          model: ${CLAUDE_MODEL}
+    ollama:
+      base-url: http://ollama:11434
+      embedding:
+        options:
+          model: nomic-embed-text
+    #openai:
+    #  api-key: ${OPENAI_API_KEY}
+
+    #  chat:
+    #    options:
+    #      model: gpt-4o-mini
+
+    #  embedding:
+    #    options:
+    #      model: text-embedding-3-small
+
